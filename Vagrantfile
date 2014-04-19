@@ -10,6 +10,9 @@ CONFIG= "config.rb"
 # Defaults for config options defined in CONFIG
 $num_instances = 1
 $enable_serial_logging = false
+$vb_gui = false
+$vb_memory = 1024
+$vb_cpus = 1
 
 # Attempt to apply the deprecated environment variable NUM_INSTANCES to
 # $num_instances while allowing config.rb to override it
@@ -65,8 +68,8 @@ Vagrant.configure("2") do |config|
       end
 
       config.vm.provider :virtualbox do |vb|
-        vb.gui = true
-        vb.customize ["modifyvm", :id, "--memory", "1024", "--cpus", "1"]
+        vb.gui = $vb_gui
+        vb.customize ["modifyvm", :id, "--memory", $vb_memory, "--cpus", $vb_cpus]
       end
 
       ip = "172.17.8.#{i+100}"
